@@ -5,13 +5,52 @@ class Partner:
         self.city=city
         self.credit_limit=credit_limit
 
-    def describe(self):
-        return {self.name,self.email,self.city,self.credit_limit}
+    #for printing - use repr mothod
+    # def describe(self):
+    #     return {self.name,self.email,self.city,self.credit_limit}
 
-  
+    def __repr__(self):
+        return f"({self.name}, city={self.city})"
+
+    def __lt__(self, other):
+        return self.name < other.name
+
+#1.give a name stay in pune city
+def partners_in_city(Partners,city): 
+    city = city.lower()
+    result = []
+
+    for p in Partners:
+        if p.city.lower() == city:
+            result.append(p)
+    return result
+
+#2.calculate total credit
+
+def total_credit (partner):
+    total=0
+
+    for p in partner:
+        total=total+p.credit_limit
+
+    # for i in range(len(Partner)):
+    #     p = partner[i]
+    #     total+= p.credit_limit
+        
+    return total
+#3.which partner is credit biggest
+def big_credit(partner):
+    biggest=partners[0]
+    for p in partner:
+        if p.credit_limit>biggest.credit_limit:
+            biggest = p
+
+    return biggest
+
+#---------
 
 #create 8 object
-Partners = [
+partners = [
 
             Partner("Arshita","arshitapatel077@gmail.com","Delhi",500000),
             Partner("Jay","jaylim@gmail.com","Ahemdabad",300000),
@@ -23,43 +62,31 @@ Partners = [
             Partner("Ram","ram78@gmail.com","Rajkot",340000),
 
            ]  
-#1.give a name stay in pune city
-def partners_in_city(Partners,city): 
-    result = []
 
-    for p in Partners:
-        if p.city == city:
-            result.append(p)
-    return result
+# partners = [53,5343,5,7,32]
 
-pune_partner = partners_in_city(Partners, "pune")
+print("All My parters: ",partners)
 
-print("Partners in Pune:")
+partners.sort(reverse=False)
 
-for p in pune_partner:
-    print("-", p.name)
+print("Sorted All My parters: ",partners)
+# print(partners[0])
 
-#2.calculate total credit
+# pune_partner = partners_in_city(partners, "pune")
 
-def total_credit (Partner):
-    total=0
+# print("Partners in Pune:", pune_partner)
 
-    for p in Partner:
-        total=total+p.credit_limit
+# # for p in pune_partner:
+# #     print("-", p.name)
 
-    return total
-total = total_credit(Partners)
-print("Total credit rupees:",total)
 
-#3.which partner is credit biggest
-def big_credit(Partner):
-    biggest=Partners[0]
-    for p in Partner:
-        if p.credit_limit>biggest.credit_limit:
-            biggest = p
+# total = total_credit(partners)
+# print("Total credit rupees:",total)
 
-    return biggest
-biggest = big_credit(Partners)
-print("biggest customer:",biggest.name,biggest.credit_limit)
+
+# biggest = big_credit(partners)
+# print("biggest customer:",biggest.name,biggest.credit_limit)
+
+
         
     
