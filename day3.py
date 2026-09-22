@@ -11,6 +11,7 @@ class Partner:
 class Customer(Partner):
     def __init__(self,name,email,city,discount_percent):# this is parent class method call in child classs
             super().__init__(name,email,city)
+            #add one extra attribute
             self.discount_percent=discount_percent
 
     #this is override method

@@ -1,0 +1,2 @@
+today i am creating parent class and child class this prent class all methon inherited in child class 
+-> this main reason is if  parent class method required in child class does not need create new method u can use this method in child class that why function make a reusable and this called inheritance

@@ -16,21 +16,21 @@ class Partner:
         return self.name < other.name
 
 #1.give a name stay in pune city
-def partners_in_city(Partners,city): 
+def partners_in_city(partners,city): 
     city = city.lower()
     result = []
 
-    for p in Partners:
+    for p in partners:
         if p.city.lower() == city:
             result.append(p)
     return result
 
 #2.calculate total credit
 
-def total_credit (partner):
+def total_credit (Partner):
     total=0
 
-    for p in partner:
+    for p in Partner:
         total=total+p.credit_limit
 
     # for i in range(len(Partner)):
