@@ -16,18 +16,60 @@ class customer(partner):
     def __repr__(self):
         return  f"{super().__repr__()},{self.discount_percent} % discount"
 
+class contactbook:
+    def __init__(self):
+        self.partners=[]
+
+    def add(self,partner):
+        self.partners.append(partner)
+
+    def remove(self,email):
+        for partner in self.partners:
+            if partner.email == email:
+                self.partners.remove(partner)
+                return True
+            return False
+
+    def find_by_city(self,city):
+        result=[]
+        for partner in self.partners:
+            if partner.city == city:
+               result.append(partner)
+        return result
+
+    def find_by_email(self,email):
+        for partner in self.partners:
+            if partner.email == email:
+                return partner
+        return None
+    def report(self):
+        print(f"Total partner:{len(self.partners)}")
+        for partner in self.partners:
+            print(self.partner)
+
+    def __len__(self):
+        return len(self.partners)
+
+    def __iter__(self):
+        return iter(self.partners)
     
 
 partner1=partner("arshita","arshpatel077@gmail.com","Bangluru",123000)
-patner2=partner("Jay","jay23@gmail.com","Ahemdabad",345212)
-patner3=partner("Rutvi","Rut32@gmail.com","Bangluru",983451)
+partner2=partner("Jay","jay23@gmail.com","Ahemdabad",345212)
+partner3=partner("Rutvi","Rut32@gmail.com","Bangluru",983451)
 
 customer1=customer("jay","jaylim@gmail.com","Bangluru",69098,10)
 
 print(partner1)
 print(customer1)
 
-len(contact_book)
+book = contactbook()
+book.add(partner1)
+book.add(customer1)
+book.add(partner2)
 
-for partner in contact_book:
-    print(partner)
+print("Total:",len(book))
+
+print("find by city")
+for person in book.find_by_city("Bangluru"):
+    print(person)
