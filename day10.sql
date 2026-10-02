@@ -56,12 +56,14 @@ INNER JOIN partner
     ON sale_order.partner_id = partner.id
 ORDER BY sale_order.id;
 
-INSERT INTO sale_order (reference, order_date, partner_id)
-VALUES ('SO999', '2026-09-30', 999);
+--INSERT INTO sale_order (reference, order_date, partner_id)
+--VALUES ('SO999', '2026-09-30', 999);
 
 
 
-## Day 10 Foreign Key Error I tried to insert a sale order with partner_id 999.
-#PostgreSQL rejected it because partner ID 999 does not exist in the
-#partner table.
-#A foreign key prevents an order from referring to a nonexistent partner.
+-- Day 10 Foreign Key Error I tried to insert a sale order with partner_id 999.
+--PostgreSQL rejected it because partner ID 999 does not exist in the
+--partner table.
+--A foreign key prevents an order from referring to a nonexistent partner.
+
+select partner.name,sale_order.reference,sale_order.order_date from partner left join sale_order on partner.id = sale_order.partner_id order by partner.id,sale_order.id;
