@@ -67,3 +67,27 @@ ORDER BY sale_order.id;
 --A foreign key prevents an order from referring to a nonexistent partner.
 
 select partner.name,sale_order.reference,sale_order.order_date from partner left join sale_order on partner.id = sale_order.partner_id order by partner.id,sale_order.id;
+--null he vo partner chahiae
+select partner.id,partner.name from partner
+left join sale_order on partner.id = sale_order.partner_id
+where sale_order.id is null order by partner.id;
+
+--update table
+update sale_order set partner_id=8
+where reference='SO015';
+
+--inner join partner
+SELECT
+    sale_order.reference,sale_order.order_date,
+    partner.name
+FROM partner
+INNER JOIN sale_order
+    ON partner.id = sale_order.partner_id
+ORDER BY sale_order.id;
+
+
+--count row
+SELECT COUNT(*) AS swapped_inner_join_count
+FROM partner
+INNER JOIN sale_order
+    ON partner.id = sale_order.partner_id;
