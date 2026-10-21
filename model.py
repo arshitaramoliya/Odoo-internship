@@ -104,29 +104,99 @@ class Partner:
         return cls(*row)
 
     
+    def orders(self):
+        with psycopg.connect(DATABASE_URL) as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, reference, order_date, partner_id
+                    FROM sale_order
+                    WHERE partner_id = %s
+                    ORDER BY id
+                    """,
+                    (self.id,),
+                )
+
+                rows = cursor.fetchall()
+
+        return [SaleOrder(*row) for row in rows]
 
 
+class SaleOrder:
+    def __init__(self, id, reference, order_date, partner_id):
+        self.id = id
+        self.reference = reference
+        self.order_date = order_date
+        self.partner_id = partner_id
+
+    def __str__(self):
+        return f"{self.reference} - {self.order_date}"
+
+    def partner(self):
+        return Partner.browse(self.partner_id)
+
+    def total(self):
+        with psycopg.connect(DATABASE_URL) as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT COALESCE(
+                        SUM(quantity * unit_price), 0
+                    )
+                    FROM sale_order_line
+                    WHERE order_id = %s
+                    """,
+                    (self.id,),
+                )
+
+                return cursor.fetchone()[0]
+
+    @classmethod
+    def browse(cls, order_id):
+        with psycopg.connect(DATABASE_URL) as connection:
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    """
+                    SELECT id, reference, order_date, partner_id
+                    FROM sale_order
+                    WHERE id = %s
+                    """,
+                    (order_id,),
+                )
+
+                row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return cls(*row)
+
+    
 if __name__ == "__main__":
-    from uuid import uuid4
+    partners = Partner.search()
 
-    email = f"day18-{uuid4().hex}@example.com"
+    for partner in partners:
+        orders = partner.orders()
 
-    created = Partner.create(
-        "Sharma Traders",
-        email,
-        "Delhi",
-        25000,
-    )
-    print("Created:", created)
+        print(
+            f"{partner.name} ({partner.city})"
+            f" - {len(orders)} orders"
+        )
 
-    partner = Partner.browse(created.id)
-    print("Browsed:", partner)
+        partner_total = 0
 
-    partner.city = "Bengaluru"
-    partner.save()
+        for order in orders:
+            amount = order.total()
+            partner_total += amount
 
-    updated = Partner.browse(created.id)
-    print("After save and re-browse:", updated)
+            print(
+                f"    {order.reference} "
+                f"{order.order_date} "
+                f"{amount:,.2f}"
+            )
 
-    partners = Partner.search("Mumbai")
-    print(f"Search found {len(partners)} partners in Mumbai")
+        print(f"    Total: {partner_total:,.2f}")
+        print()
+
+
+    
