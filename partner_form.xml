@@ -1,0 +1,13 @@
+<form string="Partner">
+    <group name="main">
+        <field name="name" widget="char" required="1"/>
+        <field name="email" widget="char"/>
+        <field name="city" widget="char"/>
+        <field name="credit_limit" widget="float"/>
+    </group>
+
+    <group name="extra">
+        <field name="phone" widget="char"/>
+        <field name="website" widget="char"/>
+    </group>
+</form>
