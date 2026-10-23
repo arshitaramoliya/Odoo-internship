@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 24px;
+        color: #222;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+        overflow-wrap: anywhere;
+    }
+
+    thead {
+        background-color: #e5e7eb;
+    }
+
+    tbody tr:nth-child(even) {
+        background-color: #f3f4f6;
+    }
+
+    form {
+        max-width: 420px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 6px;
+    }
+
+    input {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: 1px solid #999;
+        border-radius: 4px;
+    }
+
+    button {
+        padding: 10px 18px;
+        background-color: #166534;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #14532d;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Partners</title>
+</head>
+<body>
+    <h1>Partners</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Credit Limit</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr>
+                <td>Acme Corp</td>
+                <td>sales@acme.com</td>
+                <td>Mumbai</td>
+                <td>200000</td>
+            </tr>
+            <tr>
+                <td>Blue Ridge Ltd</td>
+                <td>hello@blueridge.com</td>
+                <td>Pune</td>
+                <td>800000</td>
+            </tr>
+            <tr>
+                <td>Sunrise Tech</td>
+                <td>info@sunrise.in</td>
+                <td>Delhi</td>
+                <td>970089</td>
+            </tr>
+            <tr>
+                <td>Green Foods</td>
+                <td>contact@greenfoods.in</td>
+                <td>Mumbai</td>
+                <td>1289340</td>
+            </tr>
+            <tr>
+                <td>Orbit Systems</td>
+                <td>team@orbit.com</td>
+                <td>Ahmedabad</td>
+                <td>278340</td>
+            </tr>
+            <tr>
+                <td>Silver Line</td>
+                <td>office@silverline.in</td>
+                <td>Pune</td>
+                <td>280384</td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Add Partner</h2>
+
+<form onsubmit="return false;">
+    <p>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+    </p>
+
+    <p>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </p>
+
+    <p>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city">
+    </p>
+
+    <p>
+        <label for="credit_limit">Credit Limit:</label>
+        <input
+            type="number"
+            id="credit_limit"
+            name="credit_limit"
+            min="0"
+            step="0.01"
+        >
+    </p>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
